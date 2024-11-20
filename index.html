@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Cristobal</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Encabezado */
+        header {
+            background-color: #006400;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        header .logo img {
+            width: 120px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        header .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Botón de inicio */
+        header .inicio-button {
+            margin-left: 20px;
+        }
+
+        header .inicio-button button {
+            background-color: white;
+            color: #006400;
+            padding: 8px 15px;
+            font-size: 15px;
+            font-weight: bold;
+            border: 2px solid #006400;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+
+        header .inicio-button button:hover {
+            background-color: #006400;
+            color: white;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Menú de agencias */
+        header nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        header nav a {
+            color: white;
+            padding: 8px 12px;
+            font-size: 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            background-color: #006400;
+            transition: background-color 0.3s;
+        }
+
+        header nav a:hover {
+            background-color: white;
+            color: #006400;
+        }
+
+        /* Login */
+        header .login {
+            margin-left: auto;
+            
+            padding: 8px 15px;
+            background-color: white;
+            color: #006400;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header .login:hover {
+            background-color: #006400;
+            color: white;
+        }
+
+        header .login i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* Contenedor principal */
+        .main-container {
+            flex: 1;
+            text-align: center;
+            padding: 30px;
+            margin: auto;
+        }
+
+        /* Carrusel de imágenes */
+        .carousel {
+            position: relative;
+            width: 80%;
+            margin: 0 auto;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel img.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Botones del carrusel */
+        .carousel .prev, .carousel .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .carousel .prev:hover, .carousel .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .carousel .prev {
+            left: 10px;
+        }
+
+        .carousel .next {
+            right: 10px;
+        }
+
+ /* Misión, Visión y Promesa de Marca */
+ .about-us {
+            margin-top: 40px;
+            text-align: justify;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tab-button {
+            background-color: #006400;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 20px;
+            margin: 0 5px;
+            transition: background-color 0.3s;
+        }
+
+        .tab-button.active {
+            background-color: white;
+            color: #006400;
+        }
+
+        .tab-button:hover {
+            background-color: #004d00;
+        }
+
+        .tab-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .tab-panel h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .tab-panel p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Galería de imágenes inferior */
+        .gallery {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .gallery .image {
+            width: 22%;
+            margin: 10px;
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s;
+        }
+
+        .gallery .image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .gallery p {
+            margin-top: 10px;
+            text-align: justify;
+            font-size: 14px;
+        }
+
+/* Estilos del pie de página */
+footer {
+    background-color: #222;
+    color: white;
+    padding: 40px 0;
+    position: relative;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-column {
+    width: 22%;
+    margin: 10px 0;
+}
+
+.footer-column h3 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: #7cd61e;
+}
+
+.footer-logo {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.footer-logo span {
+    color: #7cd61e;
+}
+
+.footer-social a {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 20px;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: #7cd61e;
+}
+
+/* Barra inferior ajustada */
+.footer-bottom {
+    background-color: #111;
+    color: #bbb;
+    padding: 10px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-bottom span {
+    color: #7cd61e;
+}
+
+
+
+        /* Media Queries (Responsividad) */
+        @media (max-width: 768px) {
+            .gallery .image {
+                width: 45%;
+            }
+
+            .carousel img {
+                height: 250px;
+            }
+
+            header nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            header .login {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery .image {
+                width: 90%;
+            }
+
+            .carousel img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <div class="logo">
+            <img src="Imagenes/logo-cfe.png" alt="Logo CFE">
+        </div>
+        <div class="inicio-button">
+            <button id="inicio-btn">Inicio</button>
+        </div>
+        <nav>
+            <a href="#" data-agencia="Acala.html">Acala</a>
+            <a href="#" data-agencia="vcarranza.html">Carranza</a>
+            <a href="#" data-agencia="Chenalho.html">Chenalho</a>
+            <a href="#" data-agencia="Comalapa.html">Comalapa</a>
+            <a href="#" data-agencia="Comitan.html">Comitan</a>
+            <a href="#" data-agencia="Margaritas.html">Margaritas</a>
+            <a href="#" data-agencia="Ocosingo.html">Ocosingo</a>
+            <a href="#" data-agencia="Teopisca.html">Teopisca</a>
+            <a href="#" data-agencia="Yajalon.html">Yajalon</a>
+        </nav>
+        <div class="login" style="cursor: pointer;" onclick="location.href='loginAgencias/login.html'">
+            <i>🔑</i> Iniciar Sesión
+          </div>
+          
+    </header>
+
+    <!-- Contenedor principal -->
+    <div class="main-container" id="content-container">
+        <!-- Carrusel de imágenes -->
+        <div class="carousel">
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+            <img src="Imagenes/img1.jpg" alt="Palacio Municipal" class="active">
+            <img src="Imagenes/img2.jpg" alt="Grutas de Rancho Nuevo">
+            <img src="Imagenes/img3.jpg" alt="Catedral de San Cristobal">
+            <img src="Imagenes/img4.jpg" alt="El Arcotete">
+        </div>
+
+<!-- Misión, Visión y Promesa de Marca -->
+<div class="about-us">
+    <div class="tabs">
+        <button class="tab-button active" data-tab="mission">Misión</button>
+        <button class="tab-button" data-tab="vision">Visión</button>
+        <button class="tab-button" data-tab="promise">Promesa de Marca</button>
+    </div>
+    <div class="tab-content">
+        <div id="mission" class="tab-panel active">
+            <h2>Misión</h2>
+            <p>“Proveer y comercializar el suministro de energía eléctrica, enfocados en la mejora de la experiencia de nuestros clientes, apoyados en soluciones tecnológicas, con criterios de calidad, confiabilidad, sustentabilidad y con enfoque social que impulsen el desarrollo nacional”.</p>
+        </div>
+        <div id="vision" class="tab-panel">
+            <h2>Visión</h2>
+            <p>“Ser una empresa líder, reconocida por la calidad y el​ valor del servicio de energía eléctrica brindado a nuestros clientes; a través de procesos y soluciones integrales, con criterios de desarrollo sustentable y respaldados por nuestro capital humano”.</p>
+        </div>
+        <div id="promise" class="tab-panel">
+            <h2>Promesa de Marca</h2>
+            <p>CFE SSB mantiene su compromiso de proveer el suminis​tro de energía eléctrica con la calidad y certeza, así como una cartera diversificada de productos y servicios; basados en atención de excelencia, buscando ofrecerte los mejores beneficios y estar siempre.</p>
+        </div>
+    </div>
+</div>
+
+        <!-- Galería de imágenes inferior -->
+        <div class="gallery">
+            <div class="image">
+                <img src="Imagenes/Crellenos.jpg" alt="Img 1">
+                <p><strong>Chiles rellenos</strong><br>Deliciosos Chiles rellenos con carne de cerdo y verdura, acompañados de caldillo espeso de jitomate.</p>
+            </div>
+            <div class="image">
+                <img src="Imagenes/grutas.jpg" alt="Img 2">
+                <p><strong>Grutas de Rancho Nuevo</strong><br>Bosque protegido, paseo a caballo y unas hermosas grutas.</p>
+            </div>
+            <div class="image">
+                <img src="Imagenes/catedral.jpg" alt="Img 3">
+                <p><strong>Templo de San Cristóbal</strong><br>Un imperdible en San Cristóbal, rodeado de una vibrante vida nocturna y gran variedad de bares.</p>
+            </div>
+            <div class="image">
+                <img src="Imagenes/arcotete.jpg" alt="Img 4">
+                <p><strong>El Arcotete</strong><br>Un lugar natural espectacular para disfrutar un día entre la naturaleza y grutas únicas.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie de página -->
+<!-- Pie de página -->
+<footer>
+    <div class="footer-container">
+        <!-- Columna 1: Logo y Descripción -->
+        <div class="footer-column">
+            <h2 class="footer-logo">Comisión Federal de Electricidad</h2>
+            <p>La Comisión Federal de Electricidad (CFE) tiene como misión prestar el servicio público de energía eléctrica con criterios de suficiencia, competitividad y sustentabilidad.</p>
+            <div class="footer-social">
+                <a href="https://x.com/CFEmx" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.facebook.com/CFENacional" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/cfe_nacional/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <!-- Columna 2: Our Services -->
+        <div class="footer-column">
+            <h3>Servicios que ofrece la empresa</h3>
+            <ul>
+                <li>Impresión de tu recibo de luz</li>
+                <li>Atencion por inconformidad por cobro excesivo en el consumo de energía eléctrica.</li>
+                <li>Pago del recibo de luz en línea.</li>
+                <li>Revisión del funcionamiento del medidor de luz de la CFE.</li>
+                <li>Reconexión del servicio de energía eléctrica</li>
+            </ul>
+        </div>
+
+        <!-- Columna 4: Contact Us -->
+        <div class="footer-column">
+            <h3>CONTACTO</h3>
+            <a href="https://www.google.com/maps/place/Comisi%C3%B3n+Federal+de+Electricidad/@16.7301612,-92.6561384,17z/data=!4m14!1m7!3m6!1s0x85ed457355af3903:0x9c79a0fa7ca9be4b!2sComisi%C3%B3n+Federal+de+Electricidad!8m2!3d16.7301561!4d-92.6535635!16s%2Fg%2F12hqzzzvm!3m5!1s0x85ed457355af3903:0x9c79a0fa7ca9be4b!8m2!3d16.7301561!4d-92.6535635!16s%2Fg%2F12hqzzzvm?entry=ttu&g_ep=EgoyMDI0MDkxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="text-decoration: none; color: white;"><i>📍Del Cementerio 16, Barrio de Fatima, 29265 San Cristóbal de las Casas, Chis.</i></a>
+            <p><i>📞</i> 967 987 6543</p>
+            <p><i>⌚</i> Abierto las 24 horas</p>
+        </div>
+    </div>
+
+    <!-- Barra de Copyright al final -->
+    <div class="footer-bottom">
+        <p>CFE © 2024 | Zona San Cristóbal. Derechos reservados.</p>
+    </div>
+</footer>
+
+
+    <script>
+        function initCarousel() {
+            // JavaScript para el carrusel de imágenes
+            let currentIndex = 0;
+            const images = document.querySelectorAll('.carousel img');
+            const totalImages = images.length;
+
+            function showNextImage() {
+                images[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % totalImages;
+                images[currentIndex].classList.add('active');
+            }
+
+            function showPrevImage() {
+                images[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+                images[currentIndex].classList.add('active');
+            }
+
+            // Configurar el carrusel automático (cada 3 segundos)
+            setInterval(showNextImage, 3000);
+
+            // Botones para cambiar las imágenes manualmente
+            document.querySelector('.next').addEventListener('click', showNextImage);
+            document.querySelector('.prev').addEventListener('click', showPrevImage);
+        }
+
+        // Inicializar el carrusel al cargar la página
+        initCarousel();
+
+        // Funcionalidad del botón de "Inicio" para volver a la página principal
+        document.getElementById('inicio-btn').addEventListener('click', function() {
+            location.reload(); // Recargar la página principal para volver al estado inicial
+        });
+
+        // Funcionalidad para cargar el contenido de las agencias sin recargar la página
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const agencia = this.getAttribute('data-agencia');
+
+                fetch(agencia)
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById('content-container').innerHTML = data;
+                        initCarousel(); // Re-inicializar el carrusel después de cargar nuevo contenido
+                    })
+                    .catch(error => {
+                        console.error('Error cargando la agencia:', error);
+                    });
+            });
+        });
+
+        // JavaScript para las pestañas
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+
+                this.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>

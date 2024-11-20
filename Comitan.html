@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comitan</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif; /* Nueva tipografía */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f4f4f4; /* Fondo claro */
+        }
+
+        /* Contenedor principal */
+        .main-container {
+            flex: 1;
+            text-align: center;
+            padding: 30px;
+            margin: auto;
+        }
+
+        /* Carrusel de imágenes */
+        .carousel {
+            position: relative;
+            width: 80%;
+            margin: 0 auto;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel img.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Botones del carrusel */
+        .carousel .prev, .carousel .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .carousel .prev:hover, .carousel .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .carousel .prev {
+            left: 10px;
+        }
+
+        .carousel .next {
+            right: 10px;
+        }
+
+        /* Galería de imágenes inferior */
+        .gallery {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .gallery .image {
+            width: 22%;
+            margin: 10px;
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s;
+        }
+
+        .gallery .image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .gallery p {
+            margin-top: 10px;
+            text-align: justify;
+            font-size: 14px;
+        }
+
+        /* Media Queries (Responsividad) */
+        @media (max-width: 768px) {
+            .gallery .image {
+                width: 45%;
+            }
+
+            .carousel img {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery .image {
+                width: 90%;
+            }
+
+            .carousel img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor principal -->
+    <div class="main-container">
+        <!-- Carrusel de imágenes -->
+        <div class="carousel">
+            <button class="prev">&#10094;</button>
+            <img src="Imagenes/comitan1.png" alt="Imagen 1" class="active">
+            <img src="Imagenes/comitan2.jpg" alt="Imagen 2">
+            <img src="Imagenes/comitan3.jpg" alt="Imagen 3">
+            <img src="Imagenes/comitan4.jpg" alt="Imagen 4">
+            <button class="next">&#10095;</button>
+        </div>
+
+        <!-- Galería de imágenes inferior -->
+        <div class="gallery">
+            <div class="image">
+                <img src="Imagenes/pan1.jpg" alt="Img 1">
+                <p><strong>Pan compuesto</strong><br>Es como una torta de pan blanco hecho con pan francés, una mezcla de pan dulce de hamburguesa americana y una torta 100% mexicana, pero con toque comiteco.</p>
+            </div>
+            <div class="image">
+                <img src="Imagenes/lagos-de-colon.jpg" alt="Img 2">
+                <p><strong>Lagos de Colón</strong><br>Los Lagos de Colón, son un paraje hermoso creado por un río procedente de Guatemala que al entrar a Chiapas reduce su velocidad, se separa en múltiples brazos y forma una serie de encantadoras pozas cristalinas con tonos verdiazules.</p>
+            </div>
+            <div class="image">
+                <img src="Imagenes/centrocomitan.jpg" alt="Img 3">
+                <p><strong>Pueblo Magico - Kiosko, Zocalo</strong><br>El Parque Central y sus alrededores se han remodelado para cuidar la arquitectura tradicional de Comitán. Siempre ha sido lugar de encuentro de sus habitantes, con audiciones de marimba.</p>
+            </div>
+            <div class="image">
+                <img src="Imagenes/museocomitan.jpg" alt="Img 4">
+                <p><strong>Museo Arqueológico de Comitán</strong><br>Es un museo ubicado en el municipio de Comitán de Domínguez, en el estado de Chiapas, México inaugurado en agosto de 1993.​ El edificio fue construido entre el lapso 1940 a 1944 y cuenta con una biblioteca que anteriormente fue utilizada como escuela.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // JavaScript para el carrusel de imágenes
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel img');
+        const totalImages = images.length;
+
+        // Función para cambiar la imagen activa
+        function showNextImage() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % totalImages;
+            images[currentIndex].classList.add('active');
+        }
+
+        function showPrevImage() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+            images[currentIndex].classList.add('active');
+        }
+
+        // Configurar el carrusel automático (cada 3 segundos)
+        setInterval(showNextImage, 3000);
+
+        // Botones para cambiar las imágenes manualmente
+        document.querySelector('.next').addEventListener('click', showNextImage);
+        document.querySelector('.prev').addEventListener('click', showPrevImage);
+    </script>
+
+</body>
+</html>

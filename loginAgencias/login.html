@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login CFE</title>
+    <link rel="stylesheet" href="styles-login.css"> <!-- Estilos CSS opcionales -->
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="logo-container">
+                <img src="logo_cfe.png" alt="Logo CFE" class="logo"> <!-- Asegúrate de tener este archivo de imagen -->
+            </div>
+            <h2>Iniciar Sesión</h2>
+            <!-- El formulario se enviará a 'logi
+             n_procesos.php' para procesar la autenticación -->
+            <form action="login_procesos.php" method="post" autocomplete="off">
+                <div class="input-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Entrar</button> <!-- Botón para enviar el formulario -->
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
