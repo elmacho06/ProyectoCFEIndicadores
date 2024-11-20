@@ -97,14 +97,13 @@ if (isset($_GET['month'])) {
     <select id="chartType" name="chartType">
         <option value="bar">Gráfico de Barras</option>
         <option value="line">Gráfico de Líneas</option>
-        <option value="pie">Gráfico de Pastel</option>
-        <option value="doughnut">Gráfico de Dona</option>
         <option value="radar">Gráfico Radar</option>
         <option value="polarArea">Gráfico de Área Polar</option>
+        <option value="bubble">Gráfico de Burbujas</option>
+<option value="scatter">Gráfico de Dispersión</option>
     </select>
     <button type="button" onclick="searchMonth()">Generar Gráfica</button>
-
-    <button type="button" onclick="generateReport()">Generar Reporte Excel</button>
+    <button type="button" onclick="generateExcelReport()">Generar Reporte Excel</button>
     <button type="button" onclick="downloadImage()">Descargar Imagen del Gráfico</button>
 </form>
 
@@ -139,56 +138,14 @@ if (isset($_GET['month'])) {
             myChart.destroy();
         }
 
-        const metas = data.map(item => item.meta); // Obtén la meta de cada índice
-        const tolerancias = data.map(item => item.tolerancia); // Obtén la tolerancia de cada índice
-        const reales = data.map(item => parseFloat(item.reales)); // Los valores reales
+        const metas = data.map(item => item.meta); 
+        const tolerancias = data.map(item => item.tolerancia); 
+        const reales = data.map(item => parseFloat(item.reales)); 
 
-        // Colores para el primer, segundo, tercer y cuarto registro
         const colors = data.map((item, index) => {
-            if (index === 0) {
-                // Lógica para el primer registro
-                if (reales[index] < metas[index]) return 'green';  // Real menor que la meta
-                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre meta y tolerancia
-                if (reales[index] > tolerancias[index]) return 'red';  // Real mayor que la tolerancia
-            } else if (index === 1) {
-                // Lógica para el segundo registro
-                if (reales[index] > metas[index]) return 'green';  // Real mayor que la meta
-                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre la meta y la tolerancia
-                if (reales[index] < tolerancias[index]) return 'red';  // Real menor que la tolerancia
-            } else if (index === 2) {
-                // Lógica para el tercer registro
-                if (reales[index] < metas[index]) return 'green';  // Real menor que la meta
-                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre meta y tolerancia
-                if (reales[index] > tolerancias[index]) return 'red';  // Real mayor que la tolerancia
-            } else if (index === 3) {
-                // Lógica para el cuarto registro
-                if (reales[index] > metas[index]) return 'green';  // Real mayor que la meta
-                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre la meta y la tolerancia
-                if (reales[index] < tolerancias[index]) return 'red';  // Real menor que la tolerancia
-            }else if (index === 4) {
-                // Lógica para el cuarto registro
-                if (reales[index] > metas[index]) return 'green';  // Real mayor que la meta
-                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre la meta y la tolerancia
-                if (reales[index] < tolerancias[index]) return 'red';  // Real menor que la tolerancia
-            }
-            else if (index === 5) {
-                // Lógica para el tercer registro
-                if (reales[index] < metas[index]) return 'green';  // Real menor que la meta
-                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre meta y tolerancia
-                if (reales[index] > tolerancias[index]) return 'red';  // Real mayor que la tolerancia
-            } 
-            else if (index === 6) {
-                // Lógica para el segundo registro
-                if (reales[index] > metas[index]) return 'green';  // Real mayor que la meta
-                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre la meta y la tolerancia
-                if (reales[index] < tolerancias[index]) return 'red';  // Real menor que la tolerancia
-            } else if (index === 7) {
-                // Lógica para el segundo registro
-                if (reales[index] > metas[index]) return 'green';  // Real mayor que la meta
-                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre la meta y la tolerancia
-                if (reales[index] < tolerancias[index]) return 'red';  // Real menor que la tolerancia
-            } 
-            return 'black '; // Para los demás registros, color predeterminado (negro)
+            if (reales[index] < metas[index]) return 'green'; 
+            if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; 
+            return 'red'; 
         });
 
         myChart = new Chart(ctx, {
@@ -267,7 +224,7 @@ if (isset($_GET['month'])) {
         });
     }
 
-    function generateReport() {
+    function generateExcelReport() {
         const worksheet = XLSX.utils.json_to_sheet(data);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Reporte");
@@ -284,3 +241,14 @@ if (isset($_GET['month'])) {
 
 </body>
 </html>
+<div id="colorLegend" style="margin-top: 20px; font-size: 16px;">
+    <p><strong>Significado de los colores en el gráfico:</strong></p>
+    <ul>
+        <li><span style="display:inline-block;width:20px;height:20px;background-color:green;"></span> <strong>Verde:</strong> El valor real está por debajo de la meta, lo cual indica un desempeño superior al esperado.</li>
+        <li><span style="display:inline-block;width:20px;height:20px;background-color:yellow;"></span> <strong>Amarillo:</strong> El valor real está dentro del rango de la meta y la tolerancia, indicando un desempeño aceptable.</li>
+        <li><span style="display:inline-block;width:20px;height:20px;background-color:red;"></span> <strong>Rojo:</strong> El valor real supera la tolerancia, lo que indica un desempeño por debajo de lo esperado.</li>
+        <li><span style="display:inline-block;width:20px;height:20px;background-color:rgba(0, 123, 255, 1);"></span> <strong>Azul (Línea):</strong> Representa la "Meta", que es el valor objetivo que se debe alcanzar.</li>
+        <li><span style="display:inline-block;width:20px;height:20px;background-color:rgba(255, 193, 7, 1);"></span> <strong>Amarillo (Línea):</strong> Representa la "Tolerancia", el rango dentro del cual el valor real puede estar sin considerar el desempeño como insatisfactorio.</li>
+    </ul>
+</div>
+

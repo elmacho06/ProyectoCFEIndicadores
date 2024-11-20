@@ -254,6 +254,8 @@ function exportToExceles() {
     </div>
 
     <script>
+     
+    
         const logoutDialog = document.getElementById('logoutDialog');
         const pageSelect = document.getElementById('pageSelect');
         const contentContainer = document.getElementById('contentContainer');
@@ -346,7 +348,7 @@ function exportToExceles() {
         return Array.from({ length: count }, (_, i) => colors[i % colors.length]);
     }
 
-    function generateReport() {
+    function generateExcelReport() {
         const worksheet = XLSX.utils.json_to_sheet(data);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Reporte");
@@ -363,6 +365,165 @@ function exportToExceles() {
 </body>
 
 </html>
+
+<script>
+    function renderChart() {
+    const chartType = document.getElementById('chartType').value;
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    if (myChart) {
+        myChart.destroy();
+    }
+
+    const metas = data.map(item => item.meta);
+    const tolerancias = data.map(item => item.tolerancia);
+    const reales = data.map(item => parseFloat(item.reales));
+
+    const colors = data.map((item, index) => {
+        if (index === 0) {
+            if (reales[index] < metas[index]) return 'green';
+            if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow';
+            if (reales[index] > tolerancias[index]) return 'red';
+        }else if (index === 1) {
+                // Lógica para el segundo registro
+                if (reales[index] > metas[index]) return 'green';  // Real mayor que la meta
+                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre la meta y la tolerancia
+                if (reales[index] < tolerancias[index]) return 'red';  // Real menor que la tolerancia
+            } else if (index === 2) {
+                // Lógica para el tercer registro
+                if (reales[index] < metas[index]) return 'green';  // Real menor que la meta
+                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre meta y tolerancia
+                if (reales[index] > tolerancias[index]) return 'red';  // Real mayor que la tolerancia
+            } else if (index === 3) {
+                // Lógica para el cuarto registro
+                if (reales[index] > metas[index]) return 'green';  // Real mayor que la meta
+                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre la meta y la tolerancia
+                if (reales[index] < tolerancias[index]) return 'red';  // Real menor que la tolerancia
+            }else if (index === 4) {
+                // Lógica para el cuarto registro
+                if (reales[index] > metas[index]) return 'green';  // Real mayor que la meta
+                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre la meta y la tolerancia
+                if (reales[index] < tolerancias[index]) return 'red';  // Real menor que la tolerancia
+            }
+            else if (index === 5) {
+                // Lógica para el tercer registro
+                if (reales[index] < metas[index]) return 'green';  // Real menor que la meta
+                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre meta y tolerancia
+                if (reales[index] > tolerancias[index]) return 'red';  // Real mayor que la tolerancia
+            } 
+            else if (index === 6) {
+                // Lógica para el segundo registro
+                if (reales[index] > metas[index]) return 'green';  // Real mayor que la meta
+                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre la meta y la tolerancia
+                if (reales[index] < tolerancias[index]) return 'red';  // Real menor que la tolerancia
+            } else if (index === 7) {
+                // Lógica para el segundo registro
+                if (reales[index] > metas[index]) return 'green';  // Real mayor que la meta
+                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre la meta y la tolerancia
+                if (reales[index] < tolerancias[index]) return 'red';  // Real menor que la tolerancia
+            } 
+            else if (index === 8) {
+                // Lógica para el tercer registro
+                if (reales[index] < metas[index]) return 'green';  // Real menor que la meta
+                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre meta y tolerancia
+                if (reales[index] > tolerancias[index]) return 'red';  // Real mayor que la tolerancia
+            }  else if (index === 9) {
+                // Lógica para el tercer registro
+                if (reales[index] < metas[index]) return 'green';  // Real menor que la meta
+                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre meta y tolerancia
+                if (reales[index] > tolerancias[index]) return 'red';  // Real mayor que la tolerancia
+            }
+            else if (index === 10) {
+                // Lógica para el segundo registro
+                if (reales[index] > metas[index]) return 'green';  // Real mayor que la meta
+                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre la meta y la tolerancia
+                if (reales[index] < tolerancias[index]) return 'red';  // Real menor que la tolerancia
+            }else if (index === 11) {
+                // Lógica para el segundo registro
+                if (reales[index] > metas[index]) return 'green';  // Real mayor que la meta
+                if (reales[index] >= metas[index] && reales[index] <= tolerancias[index]) return 'yellow'; // Real entre la meta y la tolerancia
+                if (reales[index] < tolerancias[index]) return 'red';  // Real menor que la tolerancia
+            }
+        // Similar lógica para otros índices...
+    });
+
+    myChart = new Chart(ctx, {
+        type: chartType,
+        data: {
+            labels: data.map(item => item.indice),
+            datasets: [
+                {
+                    label: 'Valores Reales',
+                    data: reales,
+                    backgroundColor: colors,
+                    borderColor: 'rgba(255, 255, 255, 1)',
+                    borderWidth: 2
+                },
+                {
+                    label: 'Meta',
+                    data: metas,
+                    type: 'line',
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.4
+                },
+                {
+                    label: 'Tolerancia',
+                    data: tolerancias,
+                    type: 'line',
+                    borderColor: 'rgba(255, 193, 7, 1)',
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0.4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItem) {
+                            return `Índice: ${tooltipItem[0].label}`;
+                        },
+                        label: function(tooltipItem) {
+                            return `Valor Real: ${tooltipItem.raw}`;
+                        }
+                    }
+                },
+                legend: {
+                    position: 'top'
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Índice',
+                        font: { size: 16 }
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Valores',
+                        font: { size: 16 }
+                    },
+                    ticks: {
+                        beginAtZero: true,
+                        callback: function(value) {
+                            return value.toFixed(2);
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+</script>
 <script>
 function exportToExcel() {
     var table = document.getElementById("tabla-acumulado");
@@ -374,7 +535,7 @@ function exportToExcel() {
             table { border-collapse: collapse; width: 100%; }
             th, td { padding: 8px 12px; text-align: left; border: 1px solid #ddd; }
             th { background-color: #4CAF50; color: white; }
-            tr:nth-child(even) { background-color: #f2f2f2; }
+            tr:nth-childS(even) { background-color: #f2f2f2; }
             tr:hover { background-color: #ddd; }
         </style>
     `;
