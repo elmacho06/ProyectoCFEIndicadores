@@ -163,7 +163,7 @@ color1-blue {
     <!-- Fila con el título 'Hacia los Empleados' -->
     <?php
      echo "<button onclick='exportToExcel()' style='display: block; margin: 20px auto;'>Generar Excel</button>"; // Botón para exportar
-
+ 
  echo "<tr><td colspan='39' style='font-weight: bold; text-align: center; background-color: #f4f4f4; padding: 5px; font-size: 14px; color: #333;'>Hacia Los Clientes</td></tr>";
 ?>
     <!-- Aquí se añadirán las filas de datos -->
@@ -3708,6 +3708,3 @@ function exportToExceles() {
     return x;
 }
 </script>
-
-
-

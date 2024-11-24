@@ -118,15 +118,19 @@ if (isset($_GET['month'])) {
     </div>
 </div>
 
+</script>
+
+
 <script>
-    let data = [];
+   
+    
+
+   let data = [];
     let myChart;
 
     function searchMonth() {
-        const month=document.getElementById('monthSearch').value;
-        console.log(month)
+        const month = document.getElementById('monthSearch').value;
         const monthLower = month.toLowerCase();
-        console.log(monthLower)
         fetch(`?month=${monthLower}`)
             .then(response => response.json())
             .then(newData => {
@@ -134,6 +138,113 @@ if (isset($_GET['month'])) {
                 renderChart();
             })
             .catch(error => console.error('Error al buscar datos:', error));
+    }
+
+    function calculateColors(metas, tolerancias, reales) {
+        return reales.map((val, index) => {
+            if (index === 0) {
+                if (val < metas[index]) return 'green';
+                if (val >= metas[index] && val <= tolerancias[index]) return 'yellow';
+                if (val > tolerancias[index]) return 'red';
+            } else if (index === 1) {
+                if (val > metas[index]) {
+        return 'green';
+    }
+    // Si el valor está entre la meta y la tolerancia (sin importar el orden), se pinta de amarillo
+    if ((val >= metas[index] && val <= tolerancias[index]) || (val >= tolerancias[index] && val <= metas[index])) {
+        return 'yellow';
+    }
+    // Si el valor es menor que la tolerancia, se pinta de rojo
+    if (val < tolerancias[index]) {
+        return 'red';
+    }
+            } else if (index === 2) {
+                if (val < metas[index]) return 'green';
+                if (val >= metas[index] && val <= tolerancias[index]) return 'yellow';
+                if (val > tolerancias[index]) return 'red';
+            } else if (index === 3) {
+    // Si el valor es mayor que la meta, se pinta de verde
+    if (val > metas[index]) {
+        return 'green';
+    }
+    // Si el valor está entre la meta y la tolerancia (sin importar el orden), se pinta de amarillo
+    if ((val >= metas[index] && val <= tolerancias[index]) || (val >= tolerancias[index] && val <= metas[index])) {
+        return 'yellow';
+    }
+    // Si el valor es menor que la tolerancia, se pinta de rojo
+    if (val < tolerancias[index]) {
+        return 'red';
+    }
+}
+else if (index === 4) {
+    // Si el valor está entre la meta y la tolerancia, se pinta de amarillo
+    if ((val >= metas[index] && val <= tolerancias[index]) || (val >= tolerancias[index] && val <= metas[index])) {
+        return 'yellow';
+    }
+    // Si el valor es mayor que la meta, se pinta de verde
+    if (val > metas[index]) {
+        return 'green';
+    }
+    // Si el valor es menor que la tolerancia, se pinta de rojo
+    if (val < tolerancias[index]) {
+        return 'red';
+    }
+}
+
+ else if (index === 5) {
+                if (val < metas[index]) return 'green';
+                if (val >= metas[index] && val <= tolerancias[index]) return 'yellow';
+                if (val > tolerancias[index]) return 'red';
+            } else if (index === 6) {
+                if (val > metas[index]) {
+        return 'green';
+    }
+    // Si el valor está entre la meta y la tolerancia (sin importar el orden), se pinta de amarillo
+    if ((val >= metas[index] && val <= tolerancias[index]) || (val >= tolerancias[index] && val <= metas[index])) {
+        return 'yellow';
+    }
+    // Si el valor es menor que la tolerancia, se pinta de rojo
+    if (val < tolerancias[index]) {
+        return 'red';
+    }
+            } else if (index === 7) {
+              if (val > metas[index]) {
+        return 'green';
+    }
+    // Si el valor está entre la meta y la tolerancia (sin importar el orden), se pinta de amarillo
+    if ((val >= metas[index] && val <= tolerancias[index]) || (val >= tolerancias[index] && val <= metas[index])) {
+        return 'yellow';
+    }
+    // Si el valor es menor que la tolerancia, se pinta de rojo
+    if (val < tolerancias[index]) {
+        return 'red';
+    }
+            } else if (index === 8) {
+                if (val < metas[index]) return 'green';
+                if (val >= metas[index] && val <= tolerancias[index]) return 'yellow';
+                if (val > tolerancias[index]) return 'red';
+            } else if (index === 9) {
+                if (val < metas[index]) return 'green';
+                if (val >= metas[index] && val <= tolerancias[index]) return 'yellow';
+                if (val > tolerancias[index]) return 'red';
+            } else if (index === 10) {
+                if (val > metas[index]) return 'green';
+                if (val >= metas[index] && val <= tolerancias[index]) return 'green';
+                if (val < tolerancias[index]) return 'red';
+            } else if (index === 11) {
+                if (val > metas[index]) {
+        return 'green';
+    }
+    // Si el valor está entre la meta y la tolerancia (sin importar el orden), se pinta de amarillo
+    if ((val >= metas[index] && val <= tolerancias[index]) || (val >= tolerancias[index] && val <= metas[index])) {
+        return 'yellow';
+    }
+    // Si el valor es menor que la tolerancia, se pinta de rojo
+    if (val < tolerancias[index]) {
+        return 'red';
+    }
+            }
+        });
     }
 
     function renderChart() {
@@ -144,41 +255,192 @@ if (isset($_GET['month'])) {
             myChart.destroy();
         }
 
+        const metas = data.map(item => item.meta);
+        const tolerancias = data.map(item => item.tolerancia);
+        const reales = data.map(item => parseFloat(item.reales));
+        const labels = data.map(item => item.indice);
+        const colors = calculateColors(metas, tolerancias, reales);
+
+        if (chartType === "combined") {
+            myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Meta',
+                            data: metas,
+                            backgroundColor: 'rgba(0, 123, 255, 0.6)',
+                            borderColor: 'rgba(0, 123, 255, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Tolerancia',
+                            data: tolerancias,
+                            backgroundColor: 'rgba(255, 193, 7, 0.6)',
+                            borderColor: 'rgba(255, 193, 7, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Reales (Barras)',
+                            data: reales,
+                            backgroundColor: colors,
+                            borderColor: 'rgba(255, 255, 255, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Reales (Línea)',
+                            data: reales,
+                            type: 'line',
+                            borderColor: 'rgba(40, 167, 69, 1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: { size: 14 },
+                                color: '#333'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Índice',
+                                font: { size: 16 }
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Valores',
+                                font: { size: 16 }
+                            },
+                            ticks: {
+                                beginAtZero: true,
+                                callback: function(value) {
+                                    return value.toFixed(2);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        } else {
+            renderOtherCharts(chartType, ctx, labels, metas, tolerancias, reales, colors);
+        }
+    }
+
+    function renderOtherCharts(chartType, ctx, labels, metas, tolerancias, reales, colors) {
         myChart = new Chart(ctx, {
             type: chartType,
             data: {
-                labels: data.map(item => item.indice),
-                datasets: [{
-                    label: 'Valores Reales',
-                    data: data.map(item => parseFloat(item.reales)),
-                    backgroundColor: generateColors(data.length),
-                    borderColor: 'rgba(255, 255, 255, 1)',
-                    borderWidth: 2
-                }]
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Valores Reales',
+                        data: reales,
+                        backgroundColor: colors,
+                        borderColor: 'rgba(255, 255, 255, 1)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Meta',
+                        data: metas,
+                        type: 'line',
+                        borderColor: 'rgba(0, 123, 255, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Tolerancia',
+                        data: tolerancias,
+                        type: 'line',
+                        borderColor: 'rgba(255, 193, 7, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.4
+                    }
+                ]
             },
-            options: { responsive: true, maintainAspectRatio: false }
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: { size: 14 },
+                            color: '#333'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Índice',
+                            font: { size: 16 }
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Valores',
+                            font: { size: 16 }
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            callback: function(value) {
+                                return value.toFixed(2);
+                            }
+                        }
+                    }
+                }
+            }
         });
     }
+    
 
-    function generateColors(count) {
-        const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A6', '#FFB833', '#B833FF', '#33FFF8', '#F8FF33'];
-        return Array.from({ length: count }, (_, i) => colors[i % colors.length]);
-    }
 
-    function generateReport() {
-        const worksheet = XLSX.utils.json_to_sheet(data);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Reporte");
-        XLSX.writeFile(workbook, "reporte.xlsx");
+function generateExcelReport() {
+        const ws = XLSX.utils.json_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Datos');
+        XLSX.writeFile(wb, 'Reporte.xlsx');
     }
 
     function downloadImage() {
-        const link = document.createElement('a');
-        link.href = document.getElementById('myChart').toDataURL('image/png');
-        link.download = 'grafico.png';
-        link.click();
-    }
+            const container = document.getElementById('chartContainer');
+            html2canvas(container, {
+                scale: 2,
+                useCORS: true
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'grafico.png';
+                link.click();
+            }).catch(error => console.error('Error al descargar la imagen:', error));
+        }
+     
 </script>
 
 </body>
+
 </html>
+
+
+
+
+
+
