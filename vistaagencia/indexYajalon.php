@@ -139,7 +139,12 @@ color1-blue {
     <div style="background-color: green; color: white; padding: 10px; text-align: center;">
         <h2 style="margin: 0;">"Valores Mensuales"</h2>
        
-
+        <button onclick="exportToExcel()" style="padding: 5px 10px; background-color: white; border: 1px solid green; color: black; font-size: 12px; cursor: pointer; border-radius: 3px;">
+    Generar Excel valor mensual
+  </button>
+  <button onclick="exportToExceles()" style="padding: 5px 10px; background-color: white; border: 1px solid green; color: black; font-size: 12px; cursor: pointer; border-radius: 3px;">
+    Generar Excel valores acumulados
+  </button>
     </div>
     <table id='tabla-acumulado'>
 
@@ -162,9 +167,10 @@ color1-blue {
     </tr>
     <!-- Fila con el título 'Hacia los Empleados' -->
     <?php
-     echo "<button onclick='exportToExcel()' style='display: block; margin: 20px auto;'>Generar Excel</button>"; // Botón para exportar
+    echo "<tr><td colspan='39' style='font-weight: bold; text-align: center; background-color: #f4f4f4; padding: 5px; font-size: 14px; color: #333;'>Hacia Los Clientes</td></tr>";
 
- echo "<tr><td colspan='39' style='font-weight: bold; text-align: center; background-color: #f4f4f4; padding: 5px; font-size: 14px; color: #333;'>Hacia Los Clientes</td></tr>";
+    echo "<p style='text-align: center; margin-top: 20px;'></p>";
+    ?>
 ?>
     <!-- Aquí se añadirán las filas de datos -->
         <tr>
@@ -3585,9 +3591,9 @@ echo "
 ";
 
 // Título
-echo "<h2 style='text-align: center;'>ACUMULADO VALORES MENSUALES AGENCIA YAJALON</h2>";
-
-echo "<button onclick='exportToExceles()' style='display: block; margin: 20px auto;'>Generar Excel</button>"; // Botón para exportar
+echo "<br>";
+echo "<h2 style='text-align: center; background-color: green; color: white; padding: 10px; margin: 0;'>VALORES MENSUALES ACUMULADOS</h2>";
+echo "<br>";
 
 if ($resultado->num_rows > 0) {
     $row_count_5 = 0; // Contador para los registros procesados después de 5

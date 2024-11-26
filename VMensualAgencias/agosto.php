@@ -161,23 +161,36 @@ color1-blue {
 
     </div>
     
-    <table>
+    <table id='tabla-acumulado'>
 
 
-		<th rowspan="1" class="month">INDICE</th>
-		<th colspan="3" class="month">ACALA</th>
-		<th colspan="3" class="month">CHENALHO</th>
-		<th colspan="3" class="month">COMALAPA</th>
-		<th colspan="3" class="month">COMITAN</th>
-		<th colspan="3" class="month">SAN CRISTOBAL</th>
-		<th colspan="3" class="month">MARGARITAS</th>
-		<th colspan="3" class="month">OCOSINGO</th>
-		<th colspan="3" class="month">TEOPISCA</th>
-		<th colspan="3" class="month">V. CARRANZA</th>
-		<th colspan="3" class="month">YAJALON</th>
+	<th rowspan="1" class="month">INDICE</th>
+		<th colspan="3" class="month">DK03R</th><!--acala-->
+		<th colspan="3" class="month">DK03F</th><!--chenalho-->
+		<th colspan="3" class="month">DK03J</th><!--comalapa-->
+		<th colspan="3" class="month">DK03A</th><!--comitan-->
+		<th colspan="3" class="month">DK03E</th><!--san cristobal-->
+		<th colspan="3" class="month">DK03M</th><!--margaritas-->
+		<th colspan="3" class="month">DK03C </th><!--ocosingo-->
+		<th colspan="3" class="month">DK03L</th> <!--teopisca-->
+		<th colspan="3" class="month">DK03H</th><!--v. carranza-->
+		<th colspan="3" class="month">DK03D</th><!--Yajalon-->
 		
 
     </tr>
+    <button onclick="exportToExcel('Agosto')" style="
+    display: block; 
+    margin: 20px auto; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    color: black; 
+    background-color: white; 
+    border: 2px solid #4CAF50; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    transition: all 0.3s ease;
+">Generar Excel Agosto</button>
     <!-- Fila con el título 'Hacia los Empleados' -->
     <?php
  echo "<tr><td colspan='31' style='font-weight: bold; text-align: center; background-color: #f4f4f4; padding: 5px; font-size: 14px; color: #333;'>Hacia Los Clientes</td></tr>";

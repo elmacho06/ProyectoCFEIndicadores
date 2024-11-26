@@ -315,16 +315,21 @@ function exportToExceles() {
             <option value="../VMensualCarranza/consulta_mensual.php?month=diciembre">Diciembre</option>
         </select>
         
+        
         <button class="chart-button" id="chartButton">
             <img src="../imagenes/graph_icon.png" alt="Graficar"> Graficar
         </button>
+        
+        
 
         <h1>"Transparencia y Eficiencia: Seguimiento de Indicadores en V. Carranza"</h1>
+        
         <button><a href="../vistaagencia/indexCarranza.php">Subir Avances</a></button> 
         <a href="#" class="logout-button" onclick="confirmLogout(event)">
             <img src="../Imagenes/salida.png" alt="Cerrar sesión">
         </a>
     </div>
+    
 
     <dialog id="logoutDialog">
         <p>¿Estás seguro de que deseas cerrar sesión?</p>
@@ -702,7 +707,31 @@ function generateExcelReport() {
 </body>
 
 </html>
-
+<script>
+function exportToExcel() {
+    var table = document.getElementById("tabla-acumulado");
+    var html = table.outerHTML;
+    
+    // Añadir algo de estilo básico
+    var style = `
+        <style>
+            table { border-collapse: collapse; width: 100%; }
+            th, td { padding: 8px 12px; text-align: left; border: 1px solid #ddd; }
+            th { background-color: #4CAF50; color: white; }
+            tr:nth-childS(even) { background-color: #f2f2f2; }
+            tr:hover { background-color: #ddd; }
+        </style>
+    `;
+    
+    // Agregar el estilo al contenido HTML
+    html = style + html;
+    
+    // Crear el archivo Excel
+    var uri = 'data:application/vnd.ms-excel,' + encodeURIComponent(html);
+    var x = window.open(uri);
+    return x;
+}
+</script>
 
 
 

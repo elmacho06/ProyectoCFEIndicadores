@@ -196,16 +196,16 @@ $username = $_SESSION['username'];
 
         <select id="pageSelect">
             <option value="" disabled selected>Vistas por agencias</option>
-            <option value="../vistas/indexComitan.php">Página Comitan</option>
-            <option value="../vistas/indexMargaritas.php">Página Margaritas</option>
-            <option value="../vistas/indexSanCristobal.php">Página San Cristóbal</option>
-            <option value="../vistas/indexCarranza.php">Página Carranza</option>
-            <option value="../vistas/indexAcala.php">Página Acala</option>
-            <option value="../vistas/indexChenalho.php">Página Chenalho</option>
-            <option value="../vistas/indexComalapa.php">Página Comalapa</option>
-            <option value="../vistas/indexTeopisca.php">Página Teopisca</option>
-            <option value="../vistas/indexYajalon.php">Página Yajalon</option>
-            <option value="../vistas/indexOcosingo.php">Página Ocosingo</option>
+            <option value="../vistas/indexComitan.php">Página DK03A</option>
+            <option value="../vistas/indexMargaritas.php">Página DK03M</option>
+            <option value="../vistas/indexSanCristobal.php">Página DK03E</option>
+            <option value="../vistas/indexCarranza.php">Página DK03H</option>
+            <option value="../vistas/indexAcala.php">Página DK03R</option>
+            <option value="../vistas/indexChenalho.php">Página DK03F</option>
+            <option value="../vistas/indexComalapa.php">Página DK03J</option>
+            <option value="../vistas/indexTeopisca.php">Página DK03L</option>
+            <option value="../vistas/indexYajalon.php">Página DK03D</option>
+            <option value="../vistas/indexOcosingo.php">Página DK03C</option>
            <!-- <option value="../pruebas.php">Graficar</option>-->
            
           
@@ -330,3 +330,48 @@ $username = $_SESSION['username'];
     </script>
 </body>
 </html>
+
+<script>
+function exportToExcel(month) {
+    var table = document.getElementById("tabla-acumulado");
+    var html = table.outerHTML;
+
+    // Añadir el título al contenido HTML con colspan='31'
+    var title = `
+        <table>
+            <tr>
+                <th colspan="31" 
+                    style="
+                        text-align: center; 
+                        font-size: 24px; 
+                        font-weight: bold; 
+                        background-color: #4CAF50; 
+                        color: white; 
+                        padding: 15px 0;
+                        border: 1px solid #ddd;
+                    ">
+                    Valor mensual de agencias ${month}
+                </th>
+            </tr>
+        </table>
+    `;
+    
+    // Añadir algo de estilo básico
+    var style = `
+        <style>
+            table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+            th, td { padding: 10px 15px; text-align: center; border: 1px solid #ddd; }
+            th { background-color: #4CAF50; color: white; }
+            tr:nth-child(even) { background-color: #f2f2f2; }
+            tr:hover { background-color: #ddd; }
+        </style>
+    `;
+    
+    // Combinar el título, el estilo y la tabla
+    html = style + title + html;
+    
+    // Crear el archivo Excel
+    var uri = 'data:application/vnd.ms-excel,' + encodeURIComponent(html);
+    window.open(uri);
+}
+</script>

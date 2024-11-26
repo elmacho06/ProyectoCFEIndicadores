@@ -433,7 +433,18 @@ function generateExcelReport() {
 </script>
 
 </body>
-
+</body>
+<div id="colorLegend" style="margin-top: 20px; font-size: 16px;">
+    <p><strong>Significado de los colores en el gráfico:</strong></p>
+    <ul>
+        <li><span style="display:inline-block;width:20px;height:20px;background-color:green;"></span> <strong>Verde:</strong> El valor real cumple con la meta establecida, lo cual indica un desempeño superior al esperado.</li>
+        <li><span style="display:inline-block;width:20px;height:20px;background-color:yellow;"></span> <strong>Amarillo:</strong> El valor real está dentro del rango de la meta y la tolerancia, indicando un desempeño aceptable.</li>
+        <li><span style="display:inline-block;width:20px;height:20px;background-color:red;"></span> <strong>Rojo:</strong> El valor real supera la tolerancia, lo que indica un desempeño por debajo de lo esperado.</li>
+        <li><span style="display:inline-block;width:20px;height:20px;background-color:rgba(0, 123, 255, 1);"></span> <strong>Azul (Línea):</strong> Representa la "Meta", que es el valor objetivo que se debe alcanzar.</li>
+        <li><span style="display:inline-block;width:20px;height:20px;background-color:rgba(255, 193, 7, 1);"></span> <strong>Amarillo (Línea):</strong> Representa la "Tolerancia", el rango dentro del cual el valor real puede estar sin considerar el desempeño como insatisfactorio.</li>
+    </ul>
+</div>
+</html>
 </html>
 
 

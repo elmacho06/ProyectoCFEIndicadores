@@ -667,7 +667,56 @@ function generateReport() {
         }
      
 </script>
-
+<script>
+function exportToExcel() {
+    var table = document.getElementById("tabla-acumulado");
+    var html = table.outerHTML;
+    
+    // Añadir algo de estilo básico
+    var style = `
+        <style>
+            table { border-collapse: collapse; width: 100%; }
+            th, td { padding: 8px 12px; text-align: left; border: 1px solid #ddd; }
+            th { background-color: #4CAF50; color: white; }
+            tr:nth-child(even) { background-color: #f2f2f2; }
+            tr:hover { background-color: #ddd; }
+        </style>
+    `;
+    
+    // Agregar el estilo al contenido HTML
+    html = style + html;
+    
+    // Crear el archivo Excel
+    var uri = 'data:application/vnd.ms-excel,' + encodeURIComponent(html);
+    var x = window.open(uri);
+    return x;
+}
+</script>
+<script>
+function exportToExceles() {
+    var table = document.getElementById("acumulados");
+    var html = table.outerHTML;
+    
+    // Añadir algo de estilo básico
+    var style = `
+        <style>
+            table { border-collapse: collapse; width: 100%; }
+            th, td { padding: 8px 12px; text-align: left; border: 1px solid #ddd; }
+            th { background-color: #4CAF50; color: white; }
+            tr:nth-child(even) { background-color: #f2f2f2; }
+            tr:hover { background-color: #ddd; }
+        </style>
+    `;
+    
+    // Agregar el estilo al contenido HTML
+    html = style + html;
+    
+    // Crear el archivo Excel
+    var uri = 'data:application/vnd.ms-excel,' + encodeURIComponent(html);
+    var x = window.open(uri);
+    return x;
+}
+</script>
 </body>
 
 </html>

@@ -75,8 +75,12 @@ if (isset($_GET['month'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gráficos de Datos</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@sgratzl/chartjs-chart-boxplot"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
         #chartContainer { width: 90%; height: 500px; margin: 20px auto; }
@@ -97,14 +101,11 @@ if (isset($_GET['month'])) {
     <select id="chartType" name="chartType">
         <option value="bar">Gráfico de Barras</option>
         <option value="line">Gráfico de Líneas</option>
-        <option value="pie">Gráfico de Pastel</option>
-        <option value="doughnut">Gráfico de Dona</option>
-        <option value="radar">Gráfico Radar</option>
-        <option value="polarArea">Gráfico de Área Polar</option>
+        
+        <option value="combined">Gráfico Combinado</option>
     </select>
-    <button type="button" onclick="searchMonth()">generar grafica</button>
-
-    <button type="button" onclick="generateReport()">Generar Reporte Excel</button>
+    <button type="button" onclick="searchMonth()">Generar Gráfica</button>
+    <button type="button" onclick="generateExcelReport()">Generar Reporte Excel</button>
     <button type="button" onclick="downloadImage()">Descargar Imagen del Gráfico</button>
 </form>
 
@@ -115,8 +116,14 @@ if (isset($_GET['month'])) {
     </div>
 </div>
 
+</script>
+
+
 <script>
-    let data = [];
+   
+    
+
+   let data = [];
     let myChart;
 
     function searchMonth() {
@@ -404,7 +411,7 @@ else if (index === 4) {
     
 
 
-    function generateExcelReport() {
+function generateExcelReport() {
         const ws = XLSX.utils.json_to_sheet(data);
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Datos');
@@ -427,6 +434,7 @@ else if (index === 4) {
 </script>
 
 </body>
+
 <div id="colorLegend" style="margin-top: 20px; font-size: 16px;">
     <p><strong>Significado de los colores en el gráfico:</strong></p>
     <ul>
@@ -437,6 +445,7 @@ else if (index === 4) {
         <li><span style="display:inline-block;width:20px;height:20px;background-color:rgba(255, 193, 7, 1);"></span> <strong>Amarillo (Línea):</strong> Representa la "Tolerancia", el rango dentro del cual el valor real puede estar sin considerar el desempeño como insatisfactorio.</li>
     </ul>
 </div>
+
 </html>
 
 

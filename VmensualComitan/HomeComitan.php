@@ -362,10 +362,7 @@ $username = $_SESSION['username'];
 
 
 <script>
-   
-    
-
-   let data = [];
+    let data = [];
     let myChart;
 
     function searchMonth() {
@@ -379,7 +376,6 @@ $username = $_SESSION['username'];
             })
             .catch(error => console.error('Error al buscar datos:', error));
     }
-
     function calculateColors(metas, tolerancias, reales) {
         return reales.map((val, index) => {
             if (index === 0) {
@@ -652,7 +648,8 @@ else if (index === 4) {
     }
     
 
-
+</script>
+<script>
 function generateExcelReport() {
         const ws = XLSX.utils.json_to_sheet(data);
         const wb = XLSX.utils.book_new();
@@ -678,8 +675,56 @@ function generateExcelReport() {
 </body>
 
 </html>
-
-
+<script>
+function exportToExcel() {
+    var table = document.getElementById("tabla-acumulado");
+    var html = table.outerHTML;
+    
+    // Añadir algo de estilo básico
+    var style = `
+        <style>
+            table { border-collapse: collapse; width: 100%; }
+            th, td { padding: 8px 12px; text-align: left; border: 1px solid #ddd; }
+            th { background-color: #4CAF50; color: white; }
+            tr:nth-childS(even) { background-color: #f2f2f2; }
+            tr:hover { background-color: #ddd; }
+        </style>
+    `;
+    
+    // Agregar el estilo al contenido HTML
+    html = style + html;
+    
+    // Crear el archivo Excel
+    var uri = 'data:application/vnd.ms-excel,' + encodeURIComponent(html);
+    var x = window.open(uri);
+    return x;
+}
+</script>
+<script>
+function exportToExceles() {
+    var table = document.getElementById("acumulados");
+    var html = table.outerHTML;
+    
+    // Añadir algo de estilo básico
+    var style = `
+        <style>
+            table { border-collapse: collapse; width: 100%; }
+            th, td { padding: 8px 12px; text-align: left; border: 1px solid #ddd; }
+            th { background-color: #4CAF50; color: white; }
+            tr:nth-childS(even) { background-color: #f2f2f2; }
+            tr:hover { background-color: #ddd; }
+        </style>
+    `;
+    
+    // Agregar el estilo al contenido HTML
+    html = style + html;
+    
+    // Crear el archivo Excel
+    var uri = 'data:application/vnd.ms-excel,' + encodeURIComponent(html);
+    var x = window.open(uri);
+    return x;
+}
+</script>
 
 
 

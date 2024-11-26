@@ -97,14 +97,11 @@ if (isset($_GET['month'])) {
     <select id="chartType" name="chartType">
         <option value="bar">Gráfico de Barras</option>
         <option value="line">Gráfico de Líneas</option>
-        <option value="pie">Gráfico de Pastel</option>
-        <option value="doughnut">Gráfico de Dona</option>
-        <option value="radar">Gráfico Radar</option>
-        <option value="polarArea">Gráfico de Área Polar</option>
+        
+        <option value="combined">Gráfico Combinado</option>
     </select>
-    <button type="button" onclick="searchMonth()">generar grafica</button>
-
-    <button type="button" onclick="generateReport()">Generar Reporte Excel</button>
+    <button type="button" onclick="searchMonth()">Generar Gráfica</button>
+    <button type="button" onclick="generateExcelReport()">Generar Reporte Excel</button>
     <button type="button" onclick="downloadImage()">Descargar Imagen del Gráfico</button>
 </form>
 

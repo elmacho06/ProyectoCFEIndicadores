@@ -3560,7 +3560,12 @@ echo "
 
 
 
-echo "<a href='#' onclick='exportToExceles(); return false;'></a><br>";
+
+echo "<div style='text-align: center; margin-top: 20px;'>
+        <h1 style='font-size: 24px; font-weight: bold; color: #333;'>Valores Acumulados</h1>
+      </div>";
+
+
 
 
 if ($resultado->num_rows > 0) {
