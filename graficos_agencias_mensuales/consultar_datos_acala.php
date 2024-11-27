@@ -432,7 +432,7 @@ function generateExcelReport() {
      
 </script>
 
-</body>
+
 </body>
 <div id="colorLegend" style="margin-top: 20px; font-size: 16px;">
     <p><strong>Significado de los colores en el gráfico:</strong></p>
@@ -445,7 +445,7 @@ function generateExcelReport() {
     </ul>
 </div>
 </html>
-</html>
+
 
 
 

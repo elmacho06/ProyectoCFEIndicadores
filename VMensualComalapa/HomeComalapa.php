@@ -126,14 +126,12 @@ $username = $_SESSION['username'];
         }
 
         .navbar .logo {
-            width: 180px;
-            height: 100px;
-            margin-right: 15px;
-            box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
-            -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
-        }
+    width: 180px;
+    height: 100px;
+    margin-right: 15px;
+    box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.3); /* Sombra más compacta y ligera */
+    border-radius: 10px;
+}
 
         .navbar select {
             padding: 8px 12px;
@@ -263,13 +261,50 @@ $username = $_SESSION['username'];
         .chart-button img {
             width: 20px;
             margin-right: 5px;
-        }
+        }.chart-button {
+    background-color: white; /* Fondo blanco */
+    border: 2px solid green; /* Contorno verde */
+    color: black; /* Color del texto negro */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    font-size: 16px; /* Tamaño de la fuente */
+    font-weight: bold; /* Fuente en negrita */
+    display: flex; /* Usamos flex para alinear la imagen y el texto */
+    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambio de cursor al pasar por encima */
+    transition: background-color 0.3s, border-color 0.3s; /* Efecto de transición */
+}
+
+.chart-button img {
+    width: 20px; /* Ajusta el tamaño de la imagen */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin-right: 8px; /* Espacio entre la imagen y el texto */
+}
+
+.chart-button:hover {
+    background-color: green; /* Fondo verde cuando se pasa el ratón */
+    color: white; /* Color del texto blanco */
+    border-color: darkgreen; /* Contorno verde oscuro cuando se pasa el ratón */
+}
+#title {
+    font-size: 28px; /* Tamaño de la fuente más grande */
+    font-weight: bold; /* Negrita */
+    color: white; /* Color blanco para el texto */
+    font-family: 'Arial', sans-serif; /* Familia tipográfica */
+    text-align: center; /* Centrado del texto */
+    margin-bottom: 20px; /* Espacio debajo del texto */
+    width: 50%; /* Limitar el ancho del contenedor */
+    margin-left: auto; /* Centrado horizontal */
+    margin-right: auto; /* Centrado horizontal */
+}
+
     </style>
 </head>
 
 <body>
     <div class="navbar">
-        <img src="../imagenes/mano.png" alt="Logo" class="logo">
+        <img src="../imagenes/cfepanel.png" alt="Logo" class="logo">
         <select id="pageSelect">
             <option value="" disabled selected>Valores Mensuales</option>
             <option value="../vistaagencia/indexComalapa.php">Página Comalapa</option>
@@ -288,7 +323,7 @@ $username = $_SESSION['username'];
         </select>
         
         <button class="chart-button" id="chartButton">
-            <img src="../imagenes/graph_icon.png" alt="Graficar"> Graficar
+            <img src="../imagenes/grafic.png" alt="Graficar"> Graficar
         </button>
 
         <h1>"Transparencia y Eficiencia: Seguimiento de Indicadores en Frontera Comalapa"</h1>
@@ -305,9 +340,271 @@ $username = $_SESSION['username'];
     </dialog>
 
     <div class="content-container" id="contentContainer">
-        <h2>Bienvenido</h2>
-        <p>Selecciona una página del menú para cargar su contenido aquí sin recargar la página.</p>
+    <div class="carousel-container">
+        <div class="carousel">
+            <!-- Imágenes originales -->
+            <img src="../imagenes/cfehome.png" alt="Imagen 1" class="carousel-image">
+            <img src="../imagenes/cfehome1.jpg" alt="Imagen 2" class="carousel-image">
+            <img src="../imagenes/cfehome2.jpg" alt="Imagen 3" class="carousel-image">
+            <img src="../imagenes/cfehome3.jpg" alt="Imagen 4" class="carousel-image">
+            <img src="../imagenes/CFE.jpeg" alt="Imagen 5" class="carousel-image">
+            <!-- Imágenes duplicadas para efecto cíclico -->
+            <img src="../imagenes/cfehome.png" alt="Imagen 1 Duplicada" class="carousel-image">
+            <img src="../imagenes/cfehome1.jpg" alt="Imagen 2 Duplicada" class="carousel-image">
+            <img src="../imagenes/cfehome2.jpg" alt="Imagen 3 Duplicada" class="carousel-image">
+            <img src="../imagenes/cfehome3.jpg" alt="Imagen 4 Duplicada" class="carousel-image">
+            <img src="../imagenes/CFE.jpeg" alt="Imagen 5 Duplicada" class="carousel-image">
+        </div>
     </div>
+</div>
+<div class="cfe-title">
+    <h2>Conoce CFE y los Servicios que Ofrecemos</h2>
+  </div>
+<div class="cfe-info">
+  <div class="info-panel">
+    <img src="https://cdn.icon-icons.com/icons2/325/PNG/256/Question-mark-icon_34771.png" alt="Icono Empresa" class="panel-icon">
+    <h3>¿Quiénes somos?</h3>
+    <p>Somos la Comisión Federal de Electricidad (CFE), la empresa encargada de proveer energía eléctrica a todo México.</p>
+  </div>
+
+  <div class="info-panel">
+    <img src="https://cdn.icon-icons.com/icons2/1077/PNG/512/information_77957.png" alt="Icono Servicios" class="panel-icon">
+    <h3>¿Qué hacemos?</h3>
+    <p>Generamos, distribuimos y comercializamos electricidad, impulsando el desarrollo energético del país.</p>
+  </div>
+
+  <div class="info-panel">
+    <img src="https://cdn.icon-icons.com/icons2/39/PNG/128/servicesconfig_servicios_6119.png" alt="Icono Servicios Eléctricos" class="panel-icon">
+    <h3>Servicios</h3>
+    <ul>
+      <li><a href="https://www.cfe.mx/servicios_externos/Paginas/default.aspx" target="_blank">Servicios Externos</a></li>
+      <li><a href="https://www.cfe.mx/hogar/infcliente/pages/catalogo-tramites.aspx" target="_blank">Trámites y Servicios</a></li>
+      <li><a href="https://www.revistainfraestructura.com.mx/los-proyectos-de-infraestructura-electrica-mas-importantes-del-2024/" target="_blank">Proyectos e infraestructura eléctrica</a></li>
+    </ul>
+  </div>
+
+  <div class="info-panel">
+    <img src="https://cdn.icon-icons.com/icons2/179/PNG/128/news_128x128-32_22252.png" alt="Icono Noticias" class="panel-icon">
+    <h3>Noticias Relevantes</h3>
+    <p>Conoce las últimas noticias sobre CFE y los proyectos que impactan al país:</p>
+    <ul>
+      <li><a href="https://app.cfe.mx/Aplicaciones/OTROS/Boletines/Prensa" target="_blank">Sala de prensa CFE</a></li>
+    </ul>
+  </div>
+
+  <div class="info-panel">
+    <img src="https://cdn.icon-icons.com/icons2/4215/PNG/512/recruitment_employee_search_talent_acquisition_hiring_process_icon_262948.png" alt="Icono Contratación" class="panel-icon">
+    <h3>Procedimientos de Contratación y Venta de Bienes</h3>
+    <p><a href="https://www.cfe.mx/concursoscontratos/pages/default.aspx" target="_blank">Conoce los procedimientos para contratar bienes y servicios con CFE.</a></p>
+  </div>
+
+  <div class="info-panel">
+    <img src="https://cdn.icon-icons.com/icons2/3087/PNG/512/lines_electricity_electrical_energy_cable_icon_191370.png" alt="Icono Ahorro de Energía" class="panel-icon">
+    <h3>Ahorro de Energía</h3>
+    <p><a href="https://www.gob.mx/semarnat/articulos/consejos-para-ahorrar-energia-en-casa#:~:text=Aprovecha%20al%20m%C3%A1ximo%20la%20luz%20natural%3B%20utiliza%20la%20energ%C3%ADa%20el%C3%A9ctrica,%2C%20horno%20de%20microondas%2C%20dvd." target="_blank">Infórmate sobre cómo ahorrar energía y contribuir al medio ambiente.</a></p>
+  </div>
+
+  <div class="info-panel">
+    <img src="https://cdn.icon-icons.com/icons2/1165/PNG/512/1488492642-people07_81742.png" alt="Icono Desarrollo Social" class="panel-icon">
+    <h3>Desarrollo Social</h3>
+    <p><a href="https://www.cfe.mx/desarrollo_social/pages/default.aspx" target="_blank">Descubre cómo CFE impulsa el desarrollo social a través de sus programas.</a></p>
+  </div>
+
+  <div class="info-panel">
+    <img src="https://cdn.icon-icons.com/icons2/1465/PNG/512/701electricplug_100845.png" alt="Icono Contrataciones Electrónicas" class="panel-icon">
+    <h3>Sistema Electrónico de Contrataciones</h3>
+    <p><a href="https://www.gob.mx/sfp/documentos/conoce-el-estudio-del-sistema-electronico-de-contratacion-publica-en-mexico" target="_blank">Accede al sistema electrónico para contrataciones públicas.</a></p>
+  </div>
+  <div class="info-panel">
+    <img src="https://cdn.icon-icons.com/icons2/8/PNG/256/night_rain_weather_1464.png" alt="Icono Contrataciones Electrónicas" class="panel-icon">
+    <h3>Micrositio Huracán Otis</h3>
+    <p><a href="https://www.cfe.mx/huracanotis/Pages/default.aspx" target="_blank">Micrositio Especial sobre el Huracán Otis</a></p>
+  </div>
+  
+</div>
+
+<!-- Franja de redes sociales con iconos y dirección -->
+<div class="social-bar">
+  <h3>Síguenos en nuestras redes sociales:</h3>
+  <div class="social-icons">
+    <a href="https://www.facebook.com/CFE" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="social-icon">
+    </a>
+    
+    <a href="https://www.instagram.com/cfemexico/" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1024px-Instagram_logo_2022.svg.png" alt="Instagram" class="social-icon">
+    </a>
+    <a href="https://www.youtube.com/user/CFEMexico" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" class="social-icon">
+    </a>
+  </div>
+
+  <div class="contact-info">
+    <p><strong>Dirección:</strong> Calzada del Cementerio, Barrio de Fátima, Número 16, San Cristóbal de las Casas, Chiapas</p>
+    <p><a href="https://www.google.com/maps?q=Calzada+del+Cementerio,+Barrio+de+Fátima,+Número+16,+San+Cristóbal+de+las+Casas,+Chiapas" target="_blank">Ver en Google Maps</a></p>
+  </div>
+</div>
+
+<script>
+    
+</script>
+<style>
+ .cfe-title {
+  text-align: center; /* Centra el texto */
+  margin: 40px 0; /* Espaciado arriba y abajo */
+}
+
+.cfe-title h2 {
+  font-size: 32px; /* Aumenta el tamaño del texto */
+  font-weight: bold; /* Pone el texto en negrita */
+  color: #1E2A3D; /* Color gris oscuro */
+  font-family: 'Roboto', sans-serif; /* Fuente moderna y profesional */
+  text-transform: uppercase; /* Mayúsculas */
+  letter-spacing: 4px; /* Espacio entre letras */
+  position: relative; /* Necesario para colocar la línea debajo */
+}
+
+.cfe-title h2::after {
+  content: ""; /* Crea una línea */
+  position: absolute;
+  bottom: -10px; /* Coloca la línea un poco debajo del texto */
+  left: 50%;
+  transform: translateX(-50%); /* Centra la línea */
+  width: 80%; /* Ajusta el largo de la línea */
+  height: 3px; /* Altura de la línea */
+  background-color: #FF5733; /* Color naranja para la línea */
+  border-radius: 2px; /* Bordes redondeados de la línea */
+}
+
+
+
+  .carousel-container {
+      position: relative;
+      max-width: 1200px;
+      margin: auto;
+      overflow: hidden;
+      border: 3px solid green;
+  }
+
+  .carousel {
+      display: flex;
+      animation: scrollCarousel 15s linear infinite;
+  }
+
+  .carousel-image {
+      width: 100%;
+      height: 270px;
+      object-fit: cover;
+  }
+
+  /* Animación de desplazamiento infinito */
+  @keyframes scrollCarousel {
+      0% {
+          transform: translateX(0);
+      }
+      100% {
+          transform: translateX(-50%);
+      }
+  }
+
+  .prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 24px;
+  }
+
+  .prev {
+    left: 10px;
+  }
+
+  .next {
+    right: 10px;
+  }
+
+  .cfe-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .info-panel {
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: 28%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .panel-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  .info-panel h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+
+  .info-panel a {
+    color: #4CAF50;
+    text-decoration: none;
+  }
+
+  .info-panel a:hover {
+    text-decoration: underline;
+  }
+
+  .social-bar {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .social-icons a {
+    margin: 0 15px;
+  }
+
+  .social-icons img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .contact-info {
+    margin-top: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .info-panel {
+      width: 48%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .info-panel {
+      width: 100%;
+    }
+  }
+
+.cfe-info, .social-bar {
+  margin-left: 50px; /* Ajusta este valor para mover más a la derecha */
+  max-width: 1600px; /* Controla el ancho máximo del contenido */
+}
+
+</style>
+
+
+
 
     <script>
      
