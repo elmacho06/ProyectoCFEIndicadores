@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
             // Redirigir según la agencia correspondiente
             switch ($username) {
                 case 'comitan':
-                    header('Location: ../VMensualComitan/HomeComitan.php');
+                    header('Location: ../VmensualComitan/HomeComitan.php');
                     break;
                 case 'margaritas':
                     header('Location: ../VMensualMargaritas/HomeMargaritas.php');

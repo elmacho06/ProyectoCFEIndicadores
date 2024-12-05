@@ -139,9 +139,14 @@ color1-blue {
     <div style="background-color: green; color: white; padding: 10px; text-align: center;">
         <h2 style="margin: 0;">AGENCIA MARGARITAS "Valores Mensuales"</h2>
        
-
+        <button onclick="exportToExcel()" style="padding: 5px 10px; background-color: white; border: 1px solid green; color: black; font-size: 12px; cursor: pointer; border-radius: 3px;">
+    Generar Excel valores mensuales
+  </button> 
+  <button onclick="exportToExcele()" style="padding: 5px 10px; background-color: white; border: 1px solid green; color: black; font-size: 12px; cursor: pointer; border-radius: 3px;">
+    Generar Excel valores Acumulados
+  </button> 
     </div>
-    <table>
+    <table id='tabla-acumulado'>
 
 
 		<th rowspan="1" class="month">INDICE</th>
@@ -3561,7 +3566,9 @@ echo "
 
 
 
-echo "<a href='#' onclick='exportToExceles(); return false;'></a><br>";
+echo "<br>";
+echo "<h2 style='text-align: center; background-color: green; color: white; padding: 10px; margin: 0;'>VALORES MENSUALES ACUMULADOS</h2>";
+echo "<br>";
 
 
 if ($resultado->num_rows > 0) {

@@ -138,11 +138,16 @@ color1-blue {
 <body>
     <div style="background-color: green; color: white; padding: 10px; text-align: center;">
         <h2 style="margin: 0;">AGENCIA ACALA "Valores Mensuales"</h2>
-       
+        <button onclick="exportToExcel()" style="padding: 5px 10px; background-color: white; border: 1px solid green; color: black; font-size: 12px; cursor: pointer; border-radius: 3px;">
+    Generar Excel valores mensuales
+  </button> 
+  <button onclick="exportToExcele()" style="padding: 5px 10px; background-color: white; border: 1px solid green; color: black; font-size: 12px; cursor: pointer; border-radius: 3px;">
+    Generar Excel valores Acumulados
+  </button> 
 
     </div>
     
-    <table>
+    <table id='tabla-acumulado'>
 
 
 		<th rowspan="1" class="month">INDICE</th>
@@ -3491,7 +3496,6 @@ function obtenerNombreDeClase(dataCampo) {
 // Conexión a la base de datos
 include '../conexion/db_conect.php';
 // Query para obtener el primer registro de la tabla acala
-echo "<center><h1>VALORES ACUMULADOS</h1></center>"; // Botón para exportar
 
 $sql = "SELECT 
             id,
@@ -3565,8 +3569,9 @@ echo "
 
 
 
-echo "<a href='#' onclick='exportToExceles(); return false;'></a><br>";
-
+echo "<br>";
+echo "<h2 style='text-align: center; background-color: green; color: white; padding: 10px; margin: 0;'>VALORES MENSUALES ACUMULADOS</h2>";
+echo "<br>";
 
 if ($resultado->num_rows > 0) {
     $row_count_5 = 0; // Contador para los registros procesados después de 5
