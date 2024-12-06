@@ -226,33 +226,95 @@ $username = $_SESSION['username'];
             <option value="../VMensualAgencias/noviembre.php">Noviembre</option>
             <option value="../VMensualAgencias/diciembre.php">Diciembre</option>
         </select>
-        <select id="pageSelect4">
-        <option value="" disabled selected>Generalidades</option>
-        <option value="../generalidades/reconocimiento.html">Generar reconocimiento</option>
-        <option value="../generalidades/pruebainsercion.php">actualizar contraseña</option>
-    </select>
+        <div id="buttonContainer">
+    <button onclick="navigateToPage('../generalidades/reconocimiento.html')">
+        Generar Reconocimiento
+    </button>
+    <button onclick="navigateToPage('../generalidades/pruebainsercion.php')">
+        Actualizar Contraseña
+    </button>
+</div>
+<style>
+  #buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 0; /* Sin margen superior */
+  }
 
-    <script>
-        // Obtener el elemento select
-        const selectElement = document.getElementById('pageSelect4');
+  #buttonContainer button {
+    background-color: #007bff; /* Color azul */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px; /* Padding reducido para botones más pequeños */
+    font-size: 14px; /* Tamaño de fuente reducido */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
 
-        // Agregar un evento change para redirigir al seleccionar una opción
-        selectElement.addEventListener('change', () => {
-            const selectedOption = selectElement.value;
+  #buttonContainer button:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
+    transform: scale(1.05); /* Ligeramente más grande */
+  }
 
-            // Verificar si se ha seleccionado una opción válida
-            if (selectedOption) {
-                // Redirigir a la URL seleccionada
-                window.location.href = selectedOption;
-            }
-        });
-    </script>
+  #buttonContainer button:active {
+    transform: scale(0.95); /* Más pequeño al hacer clic */
+  }
+</style>
+<script>
+    function navigateToPage(url) {
+        if (url) {
+            // Redirigir al usuario al enlace proporcionado
+            window.location.href = url;
+        }
+    }
+</script>
+
+
 
         <button class="logout-button" id="logoutButton">
             <img src="../Imagenes/salida.png" alt="Cerrar sesión">
             Salir
         </button>
+        <div class="modal" id="logoutModal">
+        <div class="modal-content">
+            <h3>¿Estás seguro que deseas cerrar sesión?</h3>
+            <button class="confirm" id="confirmLogout">Sí</button>
+            <button class="cancel" id="cancelLogout">No</button>
+        </div>
     </div>
+    </div>
+    <script>
+        // Elementos del DOM
+        const logoutButton = document.getElementById("logoutButton");
+        const logoutModal = document.getElementById("logoutModal");
+        const confirmLogout = document.getElementById("confirmLogout");
+        const cancelLogout = document.getElementById("cancelLogout");
+
+        // Mostrar el modal al hacer clic en "Salir"
+        logoutButton.addEventListener("click", () => {
+            logoutModal.style.display = "flex";
+        });
+
+        // Confirmar cierre de sesión
+        confirmLogout.addEventListener("click", () => {
+            // Aquí puedes agregar la lógica para cerrar sesión, por ejemplo:
+            window.location.href = "../index.html"; // Redirigir a una página de cierre de sesión
+        });
+
+        // Cancelar cierre de sesión
+        cancelLogout.addEventListener("click", () => {
+            logoutModal.style.display = "none"; // Ocultar el modal
+        });
+
+        // Cerrar el modal al hacer clic fuera de él
+        window.addEventListener("click", (event) => {
+            if (event.target === logoutModal) {
+                logoutModal.style.display = "none";
+            }
+        });
+    </script>
 
     <!-- Contenedor dinámico de contenido -->
     <div class="content-container" id="contentContainer">
@@ -520,19 +582,13 @@ $username = $_SESSION['username'];
 </style>
 
     <!-- Modal de confirmación de cierre de sesión -->
-    <div class="modal" id="logoutModal">
-        <div class="modal-content">
-            <h3>¿Estás seguro que deseas cerrar sesión?</h3>
-            <button class="confirm" id="confirmLogout">Sí</button>
-            <button class="cancel" id="cancelLogout">No</button>
-        </div>
-    </div>
+   
 
     <script>
         // Capturar los select, el buscador y el contenedor de contenido
         const pageSelect = document.getElementById('pageSelect');
         const pageSelect2 = document.getElementById('pageSelect2');
-        const pageSelect4 = document.getElementById('pageSelect4');
+        const pageSelect3 = document.getElementById('pageSelect3');
         const searchInput = document.getElementById('searchInput');
         const contentContainer = document.getElementById('contentContainer');
 
@@ -567,8 +623,8 @@ $username = $_SESSION['username'];
             loadPage(pageSelect2.value);
         });
 
-        pageSelect4.addEventListener('change', function() {
-            loadPage(pageSelect4.value);
+        pageSelect3.addEventListener('change', function() {
+            loadPage(pageSelect3.value);
         });
 
         // Listener para el buscador
@@ -710,3 +766,10 @@ function exportToExcele() {
     return x;
 }
 </script>
+ <script>
+        const dateElement = document.getElementById('auto-date');
+        const currentDate = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = currentDate.toLocaleDateString('es-ES', options);
+        dateElement.textContent = `San Cristóbal de las Casas, ${formattedDate}`;
+    </script>
